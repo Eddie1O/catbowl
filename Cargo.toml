@@ -1,0 +1,44 @@
+[package]
+name = "catbowl"
+version = "0.1.0"
+authors = ["Eddie1O <andrzej.witowski@itinberlin.de>"]
+edition = "2021"
+resolver = "2"
+rust-version = "1.78"
+
+[[bin]]
+name = "catbowl"
+harness = false # do not use the built in cargo test harness -> resolve rust-analyzer errors
+
+[profile.release]
+debug = false
+opt-level = "s"
+lto = "fat"
+strip = true
+panic = "abort"
+
+[profile.dev]
+debug = true
+opt-level = 2
+lto = "off"
+
+[features]
+default = ["std", "embassy", "esp-idf-svc/native"]
+
+pio = ["esp-idf-svc/pio"]
+std = ["alloc", "esp-idf-svc/binstart", "esp-idf-svc/std"]
+alloc = ["esp-idf-svc/alloc"]
+nightly = ["esp-idf-svc/nightly"]
+experimental = ["esp-idf-svc/experimental"]
+embassy = ["esp-idf-svc/embassy-sync", "esp-idf-svc/critical-section", "esp-idf-svc/embassy-time-driver"]
+
+[dependencies]
+log = { version = "0.4", default-features = false }
+esp-idf-svc = { version = "0.48", default-features = false }
+esp-idf-hal = { version = "0.43", default-features = false }
+anyhow = "1.0.86"
+
+[build-dependencies]
+build-data = "0"
+embuild = "0"
+anyhow = "1"
