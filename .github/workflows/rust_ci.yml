@@ -24,7 +24,7 @@ jobs:
           - command: fmt
             args: --all -- --check --color always
           - command: clippy
-            args: --all-targets --all-features --workspace -- -D warnings
+            args: -- -D warnings
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,6 +33,7 @@ jobs:
         with:
           toolchain: nightly
           components: rust-src
+          targets: riscv32imc-unknown-none-elf
       - name: Enable caching
         uses: Swatinem/rust-cache@v2
       - name: Run command

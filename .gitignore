@@ -1,5 +1,7 @@
-/.vscode
-/.embuild
 /target
-/Cargo.lock
+/.embuild
+/.vscode
+/.zed
+/.helix
 .DS_Store
+**/*.rs.bk
